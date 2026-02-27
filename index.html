@@ -4,7 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Neon Portfolio</title>
+
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Google Site Verification -->
+<meta name="google-site-verification" content="yAWHyMezCcfz0plgAskyaC21EP9cxU-0doPt5wNN5RM" />
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
@@ -72,9 +77,9 @@ section{
   margin:auto;
   text-align:center;
 }
-.hero h1{font-size:3rem;font-weight:800;}
+.hero h1{font-size:3rem;font-weight:800;line-height:1.2;}
 .hero span{color:#4f46e5;text-shadow:0 0 15px #4f46e5;}
-.hero p{margin-top:20px;color:#aaa;}
+.hero p{margin-top:20px;color:#aaa;line-height:1.5;}
 .btn{
   display:inline-block;
   margin-top:30px;
@@ -93,7 +98,7 @@ section{
 .grid{
   margin-top:50px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:25px;
 }
 .card{
@@ -129,19 +134,29 @@ section{
 .ad-desktop{display:block;text-align:center;margin:60px 0;}
 .ad-mobile{display:none;text-align:center;margin:40px 0;}
 
+/* ===== Responsive ===== */
+@media(max-width:1024px){
+  .hero h1{font-size:2.5rem;}
+}
 @media(max-width:768px){
- nav ul{display:none;}
- .hero h1{font-size:2rem;}
- .ad-desktop{display:none;}
- .ad-mobile{display:block;}
+  nav ul{display:none;}
+  .hero h1{font-size:2rem;}
+  .hero p{font-size:0.95rem;}
+  .grid{gap:15px;}
+  .ad-desktop{display:none;}
+  .ad-mobile{display:block;}
+}
+@media(max-width:480px){
+  .hero h1{font-size:1.6rem;}
+  .btn{padding:10px 20px;}
+  section{padding:80px 15px 60px;}
 }
 </style>
-<meta name="google-site-verification" content="yAWHyMezCcfz0plgAskyaC21EP9cxU-0doPt5wNN5RM" />
 </head>
 <body>
 
 <!-- ===== Cursor Glow ===== -->
-<div class="cursor-glow"></div>
+<div class="cursor-glow" style="position:absolute;width:20px;height:20px;background:#4f46e5;border-radius:50%;pointer-events:none;opacity:0.6;transform:translate(-50%, -50%);z-index:9999;"></div>
 
 <nav>
   <div class="nav-container">
@@ -222,7 +237,7 @@ atOptions = {
 <script src="https://www.highperformanceformat.com/04b306660d8d25de5afd35df97989ee4/invoke.js"></script>
 </div>
 
-<!-- Additional ad scripts from original -->
+<!-- ===== Additional Ads (as in your original code) ===== -->
 <script async="async" data-cfasync="false" src="https://pl28741694.effectivegatecpm.com/676fd06783aa9c811a3d2775f94407df/invoke.js"></script>
 <div id="container-676fd06783aa9c811a3d2775f94407df"></div>
 <script>
@@ -276,9 +291,9 @@ counters.forEach(counter=>{
  const update=()=>{
   const target=+counter.getAttribute("data-target");
   const count=+counter.innerText;
-  const inc=target/100;
+  const inc=Math.ceil(target/100);
   if(count<target){
-   counter.innerText=Math.ceil(count+inc);
+   counter.innerText=Math.min(count+inc,target);
    setTimeout(update,20);
   }else{
    counter.innerText=target;
