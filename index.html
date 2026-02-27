@@ -1,194 +1,227 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rami | Professional Portfolio</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<title>Neon Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Cairo:wght@400;700;900&display=swap');
-
-:root { --main-font: 'Plus Jakarta Sans', sans-serif; }
-[lang="ar"] { --main-font: 'Cairo', sans-serif; }
-
-body {
-    font-family: var(--main-font);
-    background-color: #030712;
-    color: white;
-    overflow-x: hidden;
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+body{
+  font-family:'Poppins','Cairo',sans-serif;
+  background:#0a0f1c;
+  color:#fff;
+  overflow-x:hidden;
 }
 
-.glass {
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.08);
+/* ===== Animated Background Glow ===== */
+body::before{
+  content:"";
+  position:fixed;
+  width:600px;
+  height:600px;
+  background:radial-gradient(circle,#4f46e5,transparent 70%);
+  top:-200px;
+  left:-200px;
+  opacity:0.4;
+  animation:moveGlow 10s infinite alternate ease-in-out;
+  z-index:-1;
+}
+@keyframes moveGlow{
+  from{transform:translate(0,0);}
+  to{transform:translate(200px,150px);}
 }
 
-.blob {
-    position: absolute;
-    width: 280px;
-    height: 280px;
-    background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
-    filter: blur(80px);
-    border-radius: 50%;
-    z-index: -1;
+/* ===== Navbar ===== */
+nav{
+  position:fixed;
+  width:100%;
+  top:0;
+  background:rgba(10,15,28,0.8);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(79,70,229,0.3);
+  z-index:1000;
+}
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+nav ul{list-style:none;display:flex;gap:25px;}
+nav a{text-decoration:none;color:#ccc;font-weight:600;transition:0.3s;}
+nav a:hover{color:#4f46e5;text-shadow:0 0 10px #4f46e5;}
+.lang-btn{
+  padding:6px 14px;
+  border:none;
+  border-radius:20px;
+  background:#4f46e5;
+  color:#fff;
+  cursor:pointer;
+  font-weight:600;
+  box-shadow:0 0 10px #4f46e5;
 }
 
-@media (min-width: 768px){
-    .blob{
-        width:500px;
-        height:500px;
-    }
+/* ===== Sections ===== */
+section{
+  padding:120px 20px 80px;
+  max-width:1200px;
+  margin:auto;
+  text-align:center;
+}
+.hero h1{font-size:3rem;font-weight:800;}
+.hero span{color:#4f46e5;text-shadow:0 0 15px #4f46e5;}
+.hero p{margin-top:20px;color:#aaa;}
+.btn{
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 30px;
+  border-radius:30px;
+  background:#4f46e5;
+  color:#fff;
+  font-weight:600;
+  text-decoration:none;
+  box-shadow:0 0 20px #4f46e5;
+  transition:0.3s;
+}
+.btn:hover{transform:translateY(-5px);box-shadow:0 0 30px #6366f1;}
+
+/* ===== Cards & 3D Tilt ===== */
+.grid{
+  margin-top:50px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+.card{
+  background:#111827;
+  padding:25px;
+  border-radius:20px;
+  border:1px solid rgba(79,70,229,0.2);
+  transition:0.4s;
+  transform-style:preserve-3d;
+}
+.card:hover{
+  transform:translateY(-10px);
+  border-color:#4f46e5;
+  box-shadow:0 0 25px rgba(79,70,229,0.6);
 }
 
-.gradient-text {
-    background: linear-gradient(to right, #60a5fa, #a78bfa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+/* ===== Stats ===== */
+.stats{
+  display:flex;
+  justify-content:center;
+  gap:50px;
+  flex-wrap:wrap;
+  margin-top:40px;
 }
+.stat h2{font-size:2.5rem;color:#4f46e5;}
+.stat p{color:#aaa;}
 
-.lang-btn.active {
-    background:#3b82f6;
-    color:white;
+/* ===== Animation ===== */
+.hidden{opacity:0;transform:translateY(40px);transition:0.8s;}
+.show{opacity:1;transform:translateY(0);}
+
+/* ===== Ads ===== */
+.ad-desktop{display:block;text-align:center;margin:60px 0;}
+.ad-mobile{display:none;text-align:center;margin:40px 0;}
+
+@media(max-width:768px){
+ nav ul{display:none;}
+ .hero h1{font-size:2rem;}
+ .ad-desktop{display:none;}
+ .ad-mobile{display:block;}
 }
 </style>
 </head>
-
 <body>
 
-<div class="blob top-[-10%] left-[-10%]"></div>
-<div class="blob bottom-[-10%] right-[-10%]"></div>
+<!-- ===== Cursor Glow ===== -->
+<div class="cursor-glow"></div>
 
-<!-- NAV -->
-<nav class="fixed w-full z-50 px-4 sm:px-6 py-4 transition-all duration-300" id="navbar">
-<div class="max-w-7xl mx-auto flex justify-between items-center">
-<div class="text-xl sm:text-2xl font-black uppercase">
-RAMI<span class="text-blue-500">.</span>
-</div>
-
-<div class="glass flex p-1 rounded-xl">
-<button onclick="changeLang('en')" id="btn-en" class="lang-btn active px-3 py-1 text-[10px] font-bold rounded-lg">EN</button>
-<button onclick="changeLang('fr')" id="btn-fr" class="lang-btn px-3 py-1 text-[10px] font-bold rounded-lg">FR</button>
-<button onclick="changeLang('ar')" id="btn-ar" class="lang-btn px-3 py-1 text-[10px] font-bold rounded-lg">AR</button>
-</div>
-</div>
+<nav>
+  <div class="nav-container">
+    <h3 style="color:#4f46e5;">Portfolio</h3>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+    <button class="lang-btn" onclick="toggleLang()">EN</button>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="min-h-screen flex flex-col justify-center items-center px-6 text-center">
-
-<span class="glass px-4 py-2 rounded-full text-[10px] font-bold uppercase text-blue-400 mb-6">
-Available for New Projects
-</span>
-
-<h1 class="text-4xl sm:text-5xl md:text-8xl font-extrabold mb-6 leading-tight">
-Creating the <br>
-<span class="gradient-text">Future Web.</span>
-</h1>
-
-<p class="text-gray-400 max-w-xl text-base sm:text-lg mb-8 px-2">
-Full-stack developer focused on building high-performance sites and clean UI.
-</p>
-
-<div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-<a href="#work" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-500 px-8 py-4 rounded-2xl font-bold transition">
-My Projects
-</a>
-
-<a href="mailto:ramibnwanted777@gmail.com" class="w-full sm:w-auto text-center glass px-8 py-4 rounded-2xl font-bold">
-Contact Me
-</a>
-</div>
-
+<section class="hero hidden">
+  <h1 id="title">مرحباً 👋 أنا <span>مطور ويب</span></h1>
+  <p id="desc">أبني تجارب رقمية بتصميم ليلي احترافي وأداء عالي</p>
+  <a href="#projects" class="btn">أعمالي</a>
 </section>
 
-<!-- WORK -->
-<section id="work" class="py-20 md:py-32 px-6 max-w-7xl mx-auto">
-
-<h2 class="text-3xl sm:text-4xl md:text-6xl font-black uppercase mb-16">
-Selected Work
-</h2>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-
-<div class="glass rounded-[2rem] overflow-hidden group relative h-[350px] sm:h-[450px] md:h-[500px]">
-
-<img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800"
-class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-
-<div class="absolute inset-0 bg-blue-900/90 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center text-center p-6">
-
-<h3 class="text-2xl sm:text-3xl font-bold mb-4">
-SkyBound Airline
-</h3>
-
-<p class="text-slate-200 mb-6 text-sm sm:text-base">
-Premium flight radar and global booking platform.
-</p>
-
-<a href="https://alpd-company.netlify.app/" target="_blank"
-class="bg-white text-black px-6 py-3 rounded-xl font-bold flex items-center gap-2">
-<i data-lucide="external-link" class="w-4 h-4"></i>
-Live Site
-</a>
-
-</div>
-</div>
-
-<div class="glass rounded-[2rem] border border-dashed border-white/20 flex flex-col items-center justify-center text-gray-500 p-10 h-[350px] sm:h-[450px] md:h-[500px]">
-
-<i data-lucide="plus-circle" class="w-12 h-12 mb-4 opacity-20"></i>
-
-<p class="font-bold uppercase tracking-widest text-sm text-center">
-Next Project Coming Soon
-</p>
-
-</div>
-</div>
+<section id="about" class="hidden">
+  <h2 id="aboutTitle">من أنا؟</h2>
+  <div class="card">
+    <p id="aboutText">
+      مطور ويب بخبرة أكثر من سنتين أركز على الأداء العالي وتجربة المستخدم وبناء مشاريع عصرية.
+    </p>
+  </div>
 </section>
 
-<!-- CONTACT -->
-<section class="py-20 md:py-32 px-6 max-w-4xl mx-auto">
-
-<div class="glass p-8 sm:p-12 md:p-20 rounded-[2rem] md:rounded-[4rem] text-center">
-
-<h2 class="text-3xl sm:text-4xl md:text-7xl font-black mb-6 uppercase">
-Let's Talk.
-</h2>
-
-<p class="text-slate-400 mb-8 text-base sm:text-lg">
-Have a project in mind or just want to say hi?
-</p>
-
-<a href="mailto:ramibnwanted777@gmail.com"
-class="text-lg sm:text-2xl md:text-3xl font-bold text-blue-500 underline break-all">
-ramibnwanted777@gmail.com
-</a>
-
-</div>
+<section id="skills" class="hidden">
+  <h2 id="skillsTitle">مهاراتي</h2>
+  <div class="grid">
+    <div class="card">HTML5</div>
+    <div class="card">CSS3</div>
+    <div class="card">JavaScript</div>
+    <div class="card">UI / UX</div>
+  </div>
 </section>
 
-<footer class="py-10 text-center text-gray-600 text-xs font-bold uppercase tracking-widest">
-© 2026 RAMI PORTFOLIO
-</footer>
+<section id="projects" class="hidden">
+  <h2 id="projectsTitle">مشاريعي</h2>
+  <div class="grid" id="projectsContainer"></div>
+</section>
 
+<section class="hidden">
+  <h2>إحصائياتي</h2>
+  <div class="stats">
+    <div class="stat"><h2 data-target="2">0</h2><p>سنوات خبرة</p></div>
+    <div class="stat"><h2 data-target="30">0</h2><p>مشروع مكتمل</p></div>
+    <div class="stat"><h2 data-target="15">0</h2><p>عميل سعيد</p></div>
+  </div>
+</section>
+
+<!-- ===== Ads Desktop ===== -->
+<div class="ad-desktop">
 <script>
-lucide.createIcons();
-
-window.onscroll = () => {
-const nav = document.getElementById('navbar');
-if (window.scrollY > 50) {
-nav.style.background = "rgba(3,7,18,0.9)";
-nav.style.backdropFilter = "blur(15px)";
-} else {
-nav.style.background = "transparent";
-nav.style.backdropFilter = "none";
-}
+atOptions = {
+'key' : '253171036f055505f33d79cf58e34097',
+'format' : 'iframe',
+'height' : 90,
+'width' : 728,
+'params' : {}
 };
 </script>
+<script src="https://www.highperformanceformat.com/253171036f055505f33d79cf58e34097/invoke.js"></script>
+</div>
+
+<!-- ===== Ads Mobile ===== -->
+<div class="ad-mobile">
+<script>
+atOptions = {
+'key' : '04b306660d8d25de5afd35df97989ee4',
+'format' : 'iframe',
+'height' : 250,
+'width' : 300,
+'params' : {}
+};
+</script>
+<script src="https://www.highperformanceformat.com/04b306660d8d25de5afd35df97989ee4/invoke.js"></script>
+</div>
+
+<!-- Additional ad scripts from original -->
 <script async="async" data-cfasync="false" src="https://pl28741694.effectivegatecpm.com/676fd06783aa9c811a3d2775f94407df/invoke.js"></script>
 <div id="container-676fd06783aa9c811a3d2775f94407df"></div>
 <script>
@@ -214,5 +247,90 @@ nav.style.backdropFilter = "none";
 <script src="https://www.highperformanceformat.com/04b306660d8d25de5afd35df97989ee4/invoke.js"></script>
 <script src="https://www.effectivegatecpm.com/y18puubsv?key=0fe4ecffe454d50c341e6c178b1a0072"></script>
 <script src="https://pl28741031.effectivegatecpm.com/4c/f9/2f/4cf92fdaabd8710d2ba6593961c5e7b0.js"></script>
+
+<script>
+/* ===== Projects Dynamic ===== */
+const projects=[
+ {name:"E-commerce Website",desc:"Online store with cart system"},
+ {name:"Landing Page",desc:"High converting marketing page"},
+ {name:"Dashboard App",desc:"Admin panel interface"}
+];
+projects.forEach(p=>{
+ document.getElementById("projectsContainer").innerHTML+=`
+  <div class="card">
+   <h3>${p.name}</h3>
+   <p>${p.desc}</p>
+  </div>`;
+});
+
+/* ===== Scroll Animation ===== */
+const observer=new IntersectionObserver(entries=>{
+ entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show");});
+});
+document.querySelectorAll(".hidden").forEach(el=>observer.observe(el));
+
+/* ===== Counter Animation ===== */
+const counters=document.querySelectorAll("[data-target]");
+counters.forEach(counter=>{
+ const update=()=>{
+  const target=+counter.getAttribute("data-target");
+  const count=+counter.innerText;
+  const inc=target/100;
+  if(count<target){
+   counter.innerText=Math.ceil(count+inc);
+   setTimeout(update,20);
+  }else{
+   counter.innerText=target;
+  }
+ };
+ update();
+});
+
+/* ===== Cursor Glow ===== */
+const glow=document.querySelector(".cursor-glow");
+document.addEventListener("mousemove",e=>{
+ glow.style.left=e.clientX+"px";
+ glow.style.top=e.clientY+"px";
+});
+
+/* ===== Card 3D Tilt ===== */
+document.querySelectorAll(".card").forEach(card=>{
+ card.addEventListener("mousemove",e=>{
+  const rect=card.getBoundingClientRect();
+  const x=e.clientX-rect.left;
+  const y=e.clientY-rect.top;
+  card.style.transform=`rotateY(${(x-rect.width/2)/20}deg) rotateX(${-(y-rect.height/2)/20}deg)`;
+ });
+ card.addEventListener("mouseleave",()=>{card.style.transform="rotateY(0) rotateX(0)";});
+});
+
+/* ===== Language Toggle ===== */
+let lang=localStorage.getItem("lang")||"ar";
+function applyLang(){
+ if(lang==="en"){
+  document.documentElement.lang="en";
+  document.body.style.direction="ltr";
+  title.innerHTML="Hi 👋 I'm <span>Web Developer</span>";
+  desc.innerText="I build premium dark modern experiences.";
+  aboutTitle.innerText="About Me";
+  aboutText.innerText="Web developer with 2+ years experience focused on performance and modern UI.";
+  skillsTitle.innerText="My Skills";
+  projectsTitle.innerText="My Projects";
+  document.querySelector(".lang-btn").innerText="AR";
+ }else{
+  document.documentElement.lang="ar";
+  document.body.style.direction="rtl";
+  title.innerHTML="مرحباً 👋 أنا <span>مطور ويب</span>";
+  desc.innerText="أبني تجارب رقمية بتصميم ليلي احترافي وأداء عالي";
+  aboutTitle.innerText="من أنا؟";
+  aboutText.innerText="مطور ويب بخبرة أكثر من سنتين أركز على الأداء العالي وتجربة المستخدم.";
+  skillsTitle.innerText="مهاراتي";
+  projectsTitle.innerText="مشاريعي";
+  document.querySelector(".lang-btn").innerText="EN";
+ }
+}
+function toggleLang(){ lang=lang==="ar"?"en":"ar"; localStorage.setItem("lang",lang); applyLang();}
+applyLang();
+</script>
 </body>
 </html>
